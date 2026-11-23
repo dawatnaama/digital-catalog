@@ -1,0 +1,2995 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dawat Naama — Luxury Digital Wedding Invitations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600&family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory: #faf7f2;
+  --cream: #f5efe4;
+  --paper-card: #faf6ef;
+  --paper-edge: #dcd4c3;
+  --burgundy: #5a1827;
+  --burgundy-deep: #43101b;
+  --gold: #bda068;
+  --gold-light: #dfc896;
+  --gold-dark: #8c7343;
+  --ink: #1f1b18;
+  --navy: #1b2f4f;
+  --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #120e0d;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  position: relative;
+  background-color: #120e0d;
+  color: var(--ivory);
+  font-family: 'Montserrat', sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   HERO & VIEWPORT STAGE
+   ───────────────────────────────────────────────────────────── */
+.viewport {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 40%, #201716 0%, #120e0d 60%, #0d0a09 100%);
+  perspective: 1600px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Ambient warm lighting behind the card */
+.ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(380px, 75vw, 920px);
+  height: clamp(380px, 75vw, 920px);
+  background: radial-gradient(circle, rgba(189,160,104,0.18) 0%, rgba(90,24,39,0.12) 45%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 1.2s var(--ease-smooth), transform 1.2s var(--ease-smooth);
+}
+
+.viewport.is-opening .ambient-glow {
+  opacity: 1;
+  background: radial-gradient(circle, rgba(189,160,104,0.26) 0%, rgba(90,24,39,0.2) 48%, transparent 72%);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TOP CONTROLS & NAVIGATION (Visible once Hero is active)
+   ───────────────────────────────────────────────────────────── */
+.top-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 30;
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+}
+
+.viewport.hero-active .top-nav {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ivory);
+}
+
+.nav-logo {
+  height: 38px;
+  width: auto;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+}
+
+.nav-brand-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ctrl-btn {
+  background: rgba(18, 14, 13, 0.6);
+  border: 1px solid rgba(189, 160, 104, 0.45);
+  color: var(--gold-light);
+  padding: 8px 16px;
+  border-radius: 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.ctrl-btn:hover {
+  background: rgba(90, 24, 39, 0.45);
+  border-color: var(--gold-light);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.ctrl-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   THE INVITATION CARD VESSEL
+   Closed State: Centered 3D Card
+   Opened State: Seamlessly blooms into full-screen Hero (NO ZOOM-IN)
+   ───────────────────────────────────────────────────────────── */
+.card-vessel {
+  position: relative;
+  width: clamp(320px, 86vw, 440px);
+  height: clamp(500px, 78vh, 620px);
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 14px;
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.95),
+              0 0 0 1px rgba(189, 160, 104, 0.35),
+              0 0 45px rgba(90, 24, 39, 0.25);
+  transform-style: preserve-3d;
+  transition: width 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+              height 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+              border-radius 0.95s ease,
+              box-shadow 0.95s ease,
+              transform 0.4s ease-out;
+  cursor: pointer;
+  z-index: 10;
+  outline: none;
+}
+
+.card-vessel:focus-visible {
+  box-shadow: 0 0 0 3px var(--gold-light),
+              0 30px 70px -15px rgba(0, 0, 0, 0.95);
+}
+
+/* Expanded state: Card becomes the full Hero container with zero zoom */
+.viewport.hero-active .card-vessel {
+  width: 100% !important;
+  height: 100% !important;
+  height: 100svh !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  min-height: 100vh;
+  min-height: 100svh;
+  border-radius: 0;
+  cursor: default;
+  box-shadow: none;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+/* Inner card body holding video, inner frame, and typography */
+.card-inner {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--paper-card);
+  border-radius: inherit;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   WEDDING VIDEO BACKGROUND
+   Plays smoothly inside the hero section
+   ───────────────────────────────────────────────────────────── */
+.wedding-video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.32;
+  transition: opacity 1.1s cubic-bezier(0.2, 0.8, 0.2, 1), filter 1s ease;
+  z-index: 1;
+}
+
+.viewport.hero-active .wedding-video-bg {
+  opacity: 0.82;
+  filter: contrast(1.06) saturate(1.15) brightness(0.92);
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(18,14,13,0.55) 0%, rgba(18,14,13,0.82) 75%, rgba(10,8,7,0.95) 100%);
+  z-index: 2;
+  transition: background 1s ease, opacity 1s ease;
+}
+
+.viewport.hero-active .video-overlay {
+  background: radial-gradient(circle at 50% 45%, rgba(18,14,13,0.4) 0%, rgba(18,14,13,0.72) 65%, rgba(10,8,7,0.96) 100%);
+  opacity: 0.88;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   INNER CARD FRAME
+   - Solid luxury ivory stationery (#faf6ef) - NOT transparent
+   - Converted to Dawat Naama Royal Burgundy (#5a1827) & Gold
+   - Fades out smoothly on Hero expansion (NO ZOOM-IN)
+   ───────────────────────────────────────────────────────────── */
+.inner-card-frame {
+  position: absolute;
+  inset: 12px;
+  background-color: #faf6ef; /* Solid luxury ivory stationery paper - NOT transparent */
+  background-image: url('inner-card-frame.png');
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 1;
+  /* Converts toile illustration into Dawat Naama Royal Burgundy */
+  filter: sepia(0.95) saturate(2.6) hue-rotate(308deg) brightness(0.94) contrast(1.12);
+  box-shadow: inset 0 0 0 1.5px rgba(189, 160, 104, 0.5),
+              inset 0 0 24px rgba(189, 160, 104, 0.12),
+              0 2px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  transform: none; /* Never zoom */
+  transition: opacity 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.viewport.hero-active .inner-card-frame {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   INITIAL CARD TYPOGRAPHY (Precisely Centered Inside Inner Frame Box)
+   Fixed: Positioned absolutely at 50%/50% so it sits directly inside
+   the central ivory frame plaque without touching floral borders
+   ───────────────────────────────────────────────────────────── */
+.card-content-initial {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(8px);
+  width: clamp(190px, 60%, 250px);
+  z-index: 6;
+  text-align: center;
+  color: var(--burgundy-deep);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s var(--ease-cinematic) 0.35s,
+              transform 0.7s var(--ease-cinematic) 0.35s;
+}
+
+.viewport.is-opening .card-content-initial {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+}
+
+.viewport.hero-active .card-content-initial {
+  opacity: 0;
+  transform: translate(-50%, -50%) translateY(-14px);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.initial-logo {
+  width: clamp(56px, 22%, 70px);
+  height: auto;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 2px 6px rgba(90, 24, 39, 0.18));
+}
+
+.initial-subtitle {
+  font-family: 'Alex Brush', cursive;
+  font-size: clamp(22px, 5vw, 26px);
+  color: var(--gold-dark);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.initial-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 5vw, 26px);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  margin-bottom: 6px;
+}
+
+.initial-tagline {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(8px, 1.8vw, 9.5px);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.75;
+  line-height: 1.4;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   FULL HERO SECTION (Fixed: 100% Dead-Center Aligned in Screen)
+   ───────────────────────────────────────────────────────────── */
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(20px);
+  width: 100%;
+  max-width: 860px;
+  margin: 0;
+  padding: clamp(24px, 4vh, 48px) clamp(20px, 4vw, 40px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.85s cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.viewport.hero-active .hero-content {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+  pointer-events: auto;
+}
+
+.hero-crest {
+  width: clamp(75px, 12vw, 110px);
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 18px;
+  filter: drop-shadow(0 4px 20px rgba(189,160,104,0.45));
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.8s var(--ease-cinematic) 0.15s,
+              transform 0.8s var(--ease-cinematic) 0.15s;
+}
+
+.viewport.hero-active .hero-crest {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(9px, 1.4vw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 16px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.8s var(--ease-cinematic) 0.28s,
+              transform 0.8s var(--ease-cinematic) 0.28s;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.viewport.hero-active .hero-eyebrow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 5.2vw, 64px);
+  font-weight: 400;
+  line-height: 1.14;
+  letter-spacing: 0.04em;
+  color: var(--ivory);
+  margin-bottom: 18px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.85s var(--ease-cinematic) 0.38s,
+              transform 0.85s var(--ease-cinematic) 0.38s;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.75);
+}
+
+.hero-title span {
+  font-family: 'Alex Brush', cursive;
+  font-size: 1.22em;
+  color: var(--gold-light);
+  display: inline-block;
+  margin: 0 6px;
+  font-weight: normal;
+  text-transform: none;
+  text-shadow: 0 0 16px rgba(189,160,104,0.4);
+}
+
+.viewport.hero-active .hero-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(17px, 2.3vw, 24px);
+  font-weight: 300;
+  color: var(--cream);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 32px;
+  text-align: center;
+  line-height: 1.45;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.85s var(--ease-cinematic) 0.48s,
+              transform 0.85s var(--ease-cinematic) 0.48s;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+.viewport.hero-active .hero-tagline {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.85s var(--ease-cinematic) 0.58s,
+              transform 0.85s var(--ease-cinematic) 0.58s;
+}
+
+.viewport.hero-active .hero-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-primary, .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 34px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold-dark) 100%);
+  color: #1a120b;
+  border: 1px solid var(--gold-light);
+  box-shadow: 0 6px 22px rgba(189, 160, 104, 0.35),
+              inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(189, 160, 104, 0.55);
+  color: #0d0a08;
+}
+
+.btn-secondary {
+  background: rgba(18, 14, 13, 0.65);
+  color: var(--ivory);
+  border: 1px solid rgba(189, 160, 104, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background: rgba(90, 24, 39, 0.55);
+  border-color: var(--gold-light);
+  color: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   REPLAY OPENING BAR & SCROLL CUE
+   ───────────────────────────────────────────────────────────── */
+.replay-bar {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 25;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.8s ease 0.6s, transform 0.8s ease 0.6s;
+}
+
+.viewport.hero-active .replay-bar {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.btn-replay {
+  background: rgba(18, 14, 13, 0.7);
+  border: 1px solid rgba(189, 160, 104, 0.4);
+  color: var(--gold-light);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.btn-replay:hover {
+  background: rgba(90, 24, 39, 0.6);
+  border-color: var(--gold-light);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.btn-replay svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+.scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(223, 200, 150, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  margin-top: 4px;
+}
+
+.scroll-cue:hover {
+  color: var(--gold-light);
+}
+
+.scroll-cue svg {
+  width: 10px;
+  height: 10px;
+  fill: currentColor;
+  animation: bounceDown 1.8s infinite;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   GATEFOLD FLAPS (Front of Card)
+   ───────────────────────────────────────────────────────────── */
+.flap {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: linear-gradient(135deg, #faf7f2 0%, #f3ece0 45%, #e8ddca 100%);
+  box-shadow: inset 0 0 0 1px rgba(189, 160, 104, 0.4),
+              inset 0 0 35px rgba(189, 160, 104, 0.15);
+  transform-style: preserve-3d;
+  transition: transform 1.1s var(--ease-cinematic) 0.3s,
+              filter 1.1s var(--ease-cinematic) 0.3s,
+              opacity 0.6s ease;
+  z-index: 7;
+  backface-visibility: hidden;
+  pointer-events: none;
+}
+
+.flap.left {
+  left: 0;
+  transform-origin: left center;
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+  border-right: 1px solid rgba(189, 160, 104, 0.45);
+}
+
+.flap.right {
+  right: 0;
+  transform-origin: right center;
+  border-top-right-radius: inherit;
+  border-bottom-right-radius: inherit;
+  border-left: 1px solid rgba(189, 160, 104, 0.45);
+}
+
+.fold-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  opacity: 0.8;
+  transition: opacity 0.4s ease;
+}
+
+.fold-lines svg {
+  width: 100%;
+  height: 100%;
+}
+
+.front-brand {
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(100px, 30%, 130px);
+  height: auto;
+  z-index: 9;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 14px rgba(90, 24, 39, 0.25));
+  transition: opacity 0.4s ease, transform 0.5s ease;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SILVER SATIN RIBBON & BOW (Fixed: Unified Untying Opening Choreography)
+   - Width spans 100% of the card
+   - When opened: Bow knot tugs upward, loops pull loose, and ribbon
+     strips slide outward in unison without disconnecting
+   ───────────────────────────────────────────────────────────── */
+.ribbon {
+  position: absolute;
+  top: 56%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 60px;
+  transform: translateY(-50%);
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ribbon-strip {
+  position: absolute;
+  top: 50%;
+  height: 38px;
+  width: 50%;
+  background: linear-gradient(180deg, 
+    #ffffff 0%, 
+    #f2f2f5 15%, 
+    #d9dbe2 38%, 
+    #b0b3c0 55%, 
+    #888b99 75%, 
+    #b8bac7 90%, 
+    #ffffff 100%
+  );
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.28),
+              0 1px 2px rgba(0, 0, 0, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.9),
+              inset 0 -1px 0 rgba(0, 0, 0, 0.35);
+  transition: transform 0.85s var(--ease-cinematic) 0.22s, opacity 0.75s ease 0.35s;
+}
+
+.ribbon-strip-left {
+  left: 0;
+  transform: translateY(-50%) translateX(0);
+}
+
+.ribbon-strip-right {
+  right: 0;
+  transform: translateY(-50%) translateX(0);
+}
+
+.ribbon-bow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(140px, 44%, 180px);
+  height: auto;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.42));
+  z-index: 11;
+  transform-origin: center center;
+  pointer-events: none;
+}
+
+/* Prompt */
+.open-instruction {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  z-index: 9;
+  pointer-events: none;
+  background: rgba(250, 246, 239, 0.88);
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(189, 160, 104, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease;
+  animation: subtlePulse 2.4s ease-in-out infinite;
+  white-space: nowrap;
+}
+
+@keyframes subtlePulse {
+  0%, 100% { opacity: 0.9; transform: translateX(-50%) scale(1); }
+  50% { opacity: 0.55; transform: translateX(-50%) scale(0.97); }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   OPENING CHOREOGRAPHY
+   - Real satin knot unties: knot tugs, loop slips, ribbon parts in unison
+   - Gatefold flaps rotate open in 3D
+   - Hero blossoms smoothly in dead-center (Zero Zoom-In)
+   ───────────────────────────────────────────────────────────── */
+@keyframes untieBowKnot {
+  0% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    opacity: 1;
+    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.42));
+  }
+  24% {
+    /* Center knot pulled taut & lifts upward */
+    transform: translate(-50%, -56%) scale(1.08, 0.94) rotate(-5deg);
+    opacity: 1;
+    filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.48));
+  }
+  52% {
+    /* Silk loop slips free and expands outward */
+    transform: translate(-50%, -51%) scale(1.22, 0.74) rotate(4deg);
+    opacity: 0.88;
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
+  }
+  78% {
+    /* Satin unravels completely and dissipates smoothly */
+    transform: translate(-50%, -48%) scale(1.36, 0.45) rotate(-2deg);
+    opacity: 0.35;
+    filter: blur(2px);
+  }
+  100% {
+    transform: translate(-50%, -46%) scale(1.48, 0.2) rotate(0deg);
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+.viewport.is-opening .ribbon-bow {
+  animation: untieBowKnot 0.9s var(--ease-cinematic) forwards;
+}
+
+.viewport.is-opening .ribbon-strip-left {
+  transform: translateY(-50%) translateX(-100%);
+  opacity: 0;
+}
+
+.viewport.is-opening .ribbon-strip-right {
+  transform: translateY(-50%) translateX(100%);
+  opacity: 0;
+}
+
+.viewport.is-opening .flap.left {
+  transform: rotateY(-125deg);
+  filter: brightness(0.85);
+}
+
+.viewport.is-opening .flap.right {
+  transform: rotateY(125deg);
+  filter: brightness(0.85);
+}
+
+.viewport.is-opening .fold-lines,
+.viewport.is-opening .front-brand,
+.viewport.is-opening .open-instruction,
+.viewport.hero-active .open-instruction {
+  opacity: 0 !important;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.viewport.hero-active .flap {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 2: MORE THAN THE DETAILS (OUR APPROACH)
+   - Background: Wedding table decoration image (Replaced logo watermark)
+   - Rich dark royal vignette overlay
+   - Editorial luxury typography
+   - Interactive 3-pillar accordion with micro 3D tilt
+   ───────────────────────────────────────────────────────────── */
+.approach-section {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  background-color: #120e0d;
+  color: var(--ivory);
+  padding: clamp(70px, 8vh, 120px) clamp(16px, 4vw, 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(189, 160, 104, 0.22);
+}
+
+/* Wedding Decoration Background Visual */
+.approach-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.approach-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.24;
+  filter: saturate(1.18) contrast(1.08) brightness(0.72);
+  transform: scale(1.03);
+  transition: transform 12s ease-out, opacity 1s ease;
+}
+
+.approach-section:hover .approach-bg-img {
+  transform: scale(1.06);
+}
+
+.approach-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(180deg, #120e0d 0%, rgba(18, 14, 13, 0.82) 25%, rgba(18, 14, 13, 0.86) 75%, #0d0a09 100%),
+    radial-gradient(circle at 50% 30%, rgba(90, 24, 39, 0.38) 0%, rgba(18, 14, 13, 0.92) 70%, #0d0a09 100%);
+}
+
+.approach-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Filigree Header Ornament */
+.filigree-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.filigree-line {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.filigree-star {
+  color: var(--gold-light);
+  font-size: 11px;
+}
+
+/* Eyebrow: MORE THAN THE DETAILS */
+.approach-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(9px, 1.3vw, 11px);
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 20px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Quote Headline */
+.approach-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 4.8vw, 54px);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: 0.02em;
+  color: var(--ivory);
+  max-width: 860px;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.approach-headline em {
+  font-family: 'Alex Brush', cursive;
+  font-size: 1.25em;
+  font-style: normal;
+  color: var(--gold-light);
+  display: inline-block;
+  margin: 0 4px;
+  text-shadow: 0 0 20px rgba(189, 160, 104, 0.45);
+}
+
+/* Secondary Whispering Copy */
+.approach-subline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(17px, 2.2vw, 23px);
+  font-weight: 300;
+  color: var(--gold-light);
+  max-width: 760px;
+  margin-bottom: 28px;
+  line-height: 1.5;
+  opacity: 0.95;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Editorial Body Text */
+.approach-body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(12px, 1.4vw, 14px);
+  font-weight: 300;
+  line-height: 2;
+  letter-spacing: 0.04em;
+  color: #dfd8cf;
+  max-width: 720px;
+  margin-bottom: 44px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Interactive Note Button */
+.btn-approach-toggle {
+  background: rgba(90, 24, 39, 0.4);
+  border: 1px solid rgba(189, 160, 104, 0.5);
+  color: var(--gold-light);
+  padding: 14px 34px;
+  border-radius: 32px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  backdrop-filter: blur(10px);
+  transition: all 0.35s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  margin-bottom: 32px;
+}
+
+.btn-approach-toggle:hover {
+  background: rgba(90, 24, 39, 0.7);
+  border-color: var(--gold-light);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(90, 24, 39, 0.45);
+}
+
+.btn-approach-toggle svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+  transition: transform 0.4s var(--ease-smooth);
+}
+
+.btn-approach-toggle.is-active svg {
+  transform: rotate(180deg);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   EXPANDABLE 3-PILLAR PHILOSOPHY DISPLAY
+   ───────────────────────────────────────────────────────────── */
+.approach-pillars {
+  width: 100%;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.8s var(--ease-cinematic), opacity 0.7s ease;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr));
+  gap: 24px;
+  margin-top: 10px;
+}
+
+.approach-pillars.is-visible {
+  max-height: 1400px;
+  opacity: 1;
+  padding: 16px 0 32px;
+}
+
+/* Individual Pillar Card with 3D Tilt */
+.pillar-card {
+  position: relative;
+  background: rgba(26, 18, 17, 0.75);
+  border: 1px solid rgba(189, 160, 104, 0.28);
+  border-radius: 12px;
+  padding: 36px 28px;
+  text-align: left;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.7),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+.pillar-card:hover {
+  border-color: rgba(189, 160, 104, 0.65);
+  box-shadow: 0 20px 45px -8px rgba(90, 24, 39, 0.5),
+              0 0 20px rgba(189, 160, 104, 0.2);
+  transform: translateY(-6px);
+}
+
+.pillar-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.pillar-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--ivory);
+  margin-bottom: 6px;
+}
+
+.pillar-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.pillar-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: #dfd8cf;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SITE FOOTER
+   ───────────────────────────────────────────────────────────── */
+.site-footer {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: #0d0a09;
+  border-top: 1px solid rgba(189, 160, 104, 0.15);
+  padding: clamp(36px, 5vh, 48px) clamp(16px, 4vw, 32px) 36px;
+  text-align: center;
+  color: rgba(223, 200, 150, 0.6);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.footer-logo {
+  height: 44px;
+  width: auto;
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
+.footer-copy {
+  margin-bottom: 8px;
+}
+
+.footer-tagline {
+  font-family: 'Alex Brush', cursive;
+  font-size: 18px;
+  text-transform: none;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   RESPONSIVE TUNING
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .top-nav {
+    padding: 16px 20px;
+  }
+  .nav-brand-text {
+    font-size: 17px;
+  }
+  .card-vessel {
+    width: clamp(290px, 88vw, 360px);
+    height: clamp(480px, 74vh, 560px);
+  }
+  .approach-section {
+    padding: 90px 20px 70px;
+  }
+  .approach-pillars {
+    grid-template-columns: 1fr;
+  }
+  .pillar-card {
+    padding: 28px 22px;
+  }
+}
+
+/* ── Stage 02: Dawat Naama Collection (Tabbed Luxury Showroom) ── */
+.dn-collection-section {
+  --dn-ivory: #faf7f2;
+  --dn-cream: #f6f0e6;
+  --dn-burgundy: #5a1827;
+  --dn-burgundy-deep: #43101b;
+  --dn-gold: #bda068;
+  --dn-gold-light: #dfc896;
+  --dn-gold-dark: #8c7343;
+  --dn-ink: #1f1b18;
+  position: relative;
+  isolation: isolate;
+  background-color: #faf7f2;
+  background-image: linear-gradient(180deg, rgba(250, 247, 242, 0.86) 0%, rgba(246, 240, 230, 0.90) 45%, rgba(250, 247, 242, 0.94) 100%), url('wedding-collection-bg.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  padding: 120px 24px 100px;
+  color: var(--dn-ink);
+  font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
+}
+
+/* Header & Intro */
+.dn-collection-intro {
+  max-width: 960px;
+  margin: 0 auto 54px;
+  text-align: center;
+  position: relative;
+}
+
+.dn-collection-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--dn-burgundy);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.dn-collection-eyebrow i.eyebrow-line {
+  display: inline-block;
+  width: 34px;
+  height: 1px;
+  background: var(--dn-gold);
+}
+
+.dn-intro-frame {
+  position: relative;
+  margin: 28px 0 18px;
+  padding: 20px 24px;
+}
+
+.dn-intro-ornament {
+  display: block;
+  color: var(--dn-gold);
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.dn-collection-intro h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--dn-ink);
+  margin-bottom: 16px;
+}
+
+.dn-collection-intro h2 em {
+  font-style: italic;
+  color: var(--dn-burgundy);
+}
+
+.dn-collection-intro > p {
+  max-width: 580px;
+  margin: 0 auto;
+  color: #5c5246;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  line-height: 1.45;
+}
+
+/* Interactive Tabs Bar */
+.dn-tabs-nav-container {
+  max-width: 1220px;
+  margin: 0 auto 46px;
+  padding: 0 12px;
+}
+
+.dn-tabs-nav {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(189, 160, 104, 0.35);
+  box-shadow: 0 14px 34px rgba(78, 48, 24, 0.06);
+}
+
+.dn-tab-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 18px 14px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  color: #685b4b;
+  position: relative;
+}
+
+.dn-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--dn-burgundy);
+  border-color: rgba(189, 160, 104, 0.3);
+}
+
+.dn-tab-btn.is-active {
+  background: #ffffff;
+  color: var(--dn-burgundy);
+  border-color: var(--dn-gold);
+  box-shadow: 0 8px 24px rgba(90, 24, 39, 0.1);
+}
+
+.dn-tab-btn .tab-icon {
+  font-size: 20px;
+  color: var(--dn-gold);
+  margin-bottom: 2px;
+  transition: transform 0.3s ease;
+}
+
+.dn-tab-btn.is-active .tab-icon {
+  color: var(--dn-burgundy);
+  transform: scale(1.1);
+}
+
+.dn-tab-num {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--dn-gold-dark);
+  font-weight: 600;
+}
+
+.dn-tab-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.dn-tab-badge {
+  font-size: 8.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8c7d6c;
+  font-weight: 500;
+}
+
+.dn-tab-btn.is-active .dn-tab-badge {
+  color: var(--dn-burgundy);
+}
+
+/* Tab Panels Container */
+.dn-panels-container {
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+.dn-template-panel {
+  display: none;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  gap: clamp(40px, 6vw, 90px);
+  align-items: center;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(189, 160, 104, 0.38);
+  border-radius: 24px;
+  padding: clamp(34px, 5vw, 64px);
+  box-shadow: 0 24px 60px rgba(58, 38, 20, 0.08);
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.dn-template-panel.is-active {
+  display: grid;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Left Column: Template Information */
+.dn-panel-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.dn-template-index {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--dn-gold-dark);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.dn-template-index i.index-icon {
+  font-size: 13px;
+  color: var(--dn-gold);
+}
+
+.dn-template-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(44px, 5vw, 68px);
+  font-weight: 500;
+  color: var(--dn-burgundy);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.dn-template-subtitle {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #7d6c57;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.dn-template-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px;
+  line-height: 1.4;
+  color: #4b4136;
+  margin-bottom: 26px;
+}
+
+/* Metadata Rows with Flaticon UIcons */
+.dn-template-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(189, 160, 104, 0.25);
+  border-bottom: 1px solid rgba(189, 160, 104, 0.25);
+  margin-bottom: 22px;
+}
+
+.dn-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dn-meta-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dn-gold-dark);
+  font-weight: 600;
+}
+
+.dn-meta-label i {
+  font-size: 14px;
+  color: var(--dn-gold);
+}
+
+.dn-meta-val {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #55493c;
+}
+
+/* Feature Badges with Flaticon UIcons */
+.dn-features-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.dn-feature-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(250, 247, 242, 0.9);
+  border: 1px solid rgba(189, 160, 104, 0.32);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 10px;
+  color: #544634;
+  font-weight: 500;
+}
+
+.dn-feature-pill i {
+  font-size: 12px;
+  color: var(--dn-gold-dark);
+}
+
+/* Scratch Card & Pricing Area */
+.dn-pricing-block {
+  margin-top: 10px;
+  background: #fbf8f2;
+  border: 1px solid rgba(189, 160, 104, 0.38);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 8px 24px rgba(78, 48, 24, 0.05);
+}
+
+.dn-scratch-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.dn-scratch-title-text {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dn-gold-dark);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dn-scratch-title-text i {
+  font-size: 13px;
+  color: var(--dn-gold);
+}
+
+.dn-scratch-status-hint {
+  font-size: 9px;
+  color: #8c7d6c;
+}
+
+/* Genuine HTML5 Canvas Scratch Box */
+.dn-scratch-card {
+  position: relative;
+  min-height: 108px;
+  border-radius: 12px;
+  border: 1px solid #d4be88;
+  background: linear-gradient(135deg, #fbf7ee 0%, #f4e8cc 50%, #fdf9f1 100%);
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(189, 160, 104, 0.15);
+  touch-action: none;
+  user-select: none;
+}
+
+.dn-scratch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* Surface Prompt (shown if canvas fails or loading) */
+.dn-scratch-placeholder-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #5a422a;
+  padding: 16px;
+  z-index: 1;
+}
+
+/* Scratch Revealed Content: ONLY DISCOUNT PERCENTAGE */
+.dn-scratch-revealed {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  z-index: 2;
+  background: linear-gradient(135deg, #fffbf2 0%, #f7edcf 100%);
+}
+
+.dn-revealed-congrats {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--dn-burgundy);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dn-revealed-congrats i {
+  color: var(--dn-gold);
+  font-size: 16px;
+}
+
+.dn-revealed-badge {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  color: var(--dn-ink);
+  margin: 2px 0 4px;
+}
+
+.dn-revealed-badge strong {
+  color: var(--dn-burgundy);
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.dn-revealed-note {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7b6951;
+}
+
+/* Action Button: Displays the Final Price */
+.dn-claim-action-wrap {
+  margin-top: 16px;
+}
+
+.dn-claim-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 24px;
+  border-radius: 10px;
+  background: #c5b8a5;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  pointer-events: none;
+  opacity: 0.65;
+  transition: all 0.35s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.dn-claim-btn i {
+  font-size: 16px;
+}
+
+/* When Scratched: CTA Unlocks and Shows Final Price */
+.dn-pricing-block.is-scratched .dn-claim-btn {
+  background: var(--dn-burgundy);
+  color: #fff9ed;
+  pointer-events: auto;
+  opacity: 1;
+  box-shadow: 0 10px 26px rgba(90, 24, 39, 0.22);
+  cursor: pointer;
+}
+
+.dn-pricing-block.is-scratched .dn-claim-btn:hover {
+  background: var(--dn-burgundy-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(90, 24, 39, 0.3);
+}
+
+.dn-claim-subtext {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 9px;
+  color: #7d6e5d;
+}
+
+.dn-claim-subtext a {
+  color: var(--dn-burgundy);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+}
+
+.dn-claim-subtext a:hover {
+  text-decoration: underline;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   RIGHT COLUMN: SMARTPHONE MOCKUP
+   Requirement: DO NOT MOVE ON HOVER. ONLY THE SS SCROLLS ON HOVER.
+   ───────────────────────────────────────────────────────────── */
+.dn-panel-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.dn-phone-frame-wrapper {
+  position: relative;
+  width: min(310px, 86%);
+  /* STRICTLY STATIC: NO 3D TILT, NO MOVEMENT ON HOVER */
+  transform: none !important;
+  transition: none !important;
+}
+
+.dn-phone-frame {
+  position: relative;
+  width: 100%;
+  height: 620px;
+  padding: 10px;
+  border-radius: 44px;
+  background: linear-gradient(135deg, #383431 0%, #161514 26%, #4e4843 45%, #181716 65%, #3c3733 100%);
+  box-shadow: 0 24px 60px rgba(35, 23, 14, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.38);
+  border: 1px solid rgba(189, 160, 104, 0.3);
+  /* STATIC: NO TILT OR TRANSFORM */
+  transform: none !important;
+}
+
+/* Phone Bevel Chamfer */
+.dn-phone-frame:before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 42px;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Dynamic Island */
+.dn-phone-island {
+  position: absolute;
+  z-index: 5;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 86px;
+  height: 20px;
+  border-radius: 20px;
+  background: #121111;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+/* Glare & Reflection overlay */
+.dn-phone-glare {
+  position: absolute;
+  z-index: 4;
+  inset: 10px;
+  pointer-events: none;
+  border-radius: 34px;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.16) 0%, transparent 28%, transparent 72%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+/* Inner Scrollable Screen Viewport */
+.dn-phone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 34px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  background: #faf6ef;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.dn-phone-screen::-webkit-scrollbar {
+  display: none;
+}
+
+/* Full-length invitation screenshot */
+.dn-phone-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: transform 0.1s linear;
+}
+
+.dn-phone-caption {
+  margin-top: 16px;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dn-gold-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dn-phone-caption i {
+  font-size: 12px;
+  color: var(--dn-gold);
+}
+
+/* Responsive adjustments & zero horizontal overflow tuning */
+@media (max-width: 1024px) {
+  .dn-tabs-nav {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    padding: 6px;
+  }
+  .dn-tab-btn {
+    padding: 12px 6px;
+    gap: 4px;
+  }
+  .dn-tab-title {
+    font-size: clamp(15px, 1.8vw, 18px);
+  }
+  .dn-tab-badge {
+    font-size: 8px;
+  }
+  .dn-tab-btn .tab-icon {
+    font-size: 17px;
+  }
+  .dn-template-panel {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: clamp(24px, 4vw, 40px);
+  }
+  .dn-phone-frame-wrapper {
+    max-width: 280px;
+  }
+  .dn-phone-frame {
+    height: 540px;
+    width: 100%;
+    max-width: 280px;
+    border-radius: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dn-collection-section {
+    padding: clamp(60px, 7vh, 80px) 14px 60px;
+  }
+  .dn-collection-intro h2 {
+    font-size: clamp(30px, 6.5vw, 44px);
+  }
+  .dn-collection-intro > p {
+    font-size: clamp(16px, 3.8vw, 20px);
+  }
+  .dn-tabs-nav-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 6px 14px;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    margin-bottom: 28px;
+    box-sizing: border-box;
+  }
+  .dn-tabs-nav-container::-webkit-scrollbar {
+    display: none;
+  }
+  .dn-tabs-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    min-width: max-content;
+    width: auto;
+    gap: 8px;
+    padding: 6px;
+    box-sizing: border-box;
+  }
+  .dn-tab-btn {
+    flex: 0 0 auto;
+    min-width: 120px;
+    padding: 12px 10px;
+    scroll-snap-align: center;
+    box-sizing: border-box;
+  }
+  .dn-template-title {
+    font-size: clamp(32px, 6.5vw, 44px);
+  }
+  .dn-template-desc {
+    font-size: clamp(17px, 3.5vw, 20px);
+  }
+  .dn-template-meta {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .dn-pricing-block {
+    padding: 16px;
+  }
+  .dn-phone-frame-wrapper {
+    max-width: 260px;
+  }
+  .dn-phone-frame {
+    height: 490px;
+    width: 100%;
+    max-width: 260px;
+    border-radius: 36px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-nav {
+    padding: 14px 16px;
+  }
+  .nav-brand-text {
+    font-size: 16px;
+  }
+  .nav-logo {
+    height: 30px;
+  }
+  .card-vessel {
+    width: clamp(260px, 88vw, 340px);
+    height: clamp(450px, 72vh, 530px);
+    max-width: calc(100% - 20px);
+  }
+  .card-content-initial {
+    width: clamp(180px, 70%, 230px);
+  }
+  .approach-section {
+    padding: 70px 16px 54px;
+  }
+  .approach-headline {
+    font-size: clamp(24px, 5.8vw, 32px);
+  }
+  .pillar-card {
+    padding: 22px 18px;
+  }
+  .dn-collection-section {
+    padding: 60px 12px 50px;
+  }
+  .dn-template-panel {
+    padding: 18px 14px;
+    border-radius: 16px;
+    gap: 28px;
+  }
+  .dn-template-title {
+    font-size: 32px;
+  }
+  .dn-template-desc {
+    font-size: 17px;
+  }
+  .dn-pricing-block {
+    padding: 14px;
+    border-radius: 12px;
+  }
+  .dn-scratch-card {
+    min-height: 96px;
+  }
+  .dn-claim-btn {
+    padding: 13px 14px;
+    font-size: 10px;
+  }
+  .dn-claim-subtext {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+    justify-content: center;
+  }
+  .dn-phone-frame-wrapper {
+    max-width: 240px;
+  }
+  .dn-phone-frame {
+    height: 440px;
+    width: 100%;
+    max-width: 240px;
+    border-radius: 32px;
+    padding: 6px;
+  }
+  .dn-tab-btn {
+    min-width: 106px;
+    padding: 10px 8px;
+  }
+}
+
+@media (max-width: 340px) {
+  .card-vessel {
+    width: 260px;
+    height: 430px;
+  }
+  .dn-template-panel {
+    padding: 14px 10px;
+  }
+  .dn-phone-frame-wrapper {
+    max-width: 220px;
+  }
+  .dn-phone-frame {
+    height: 400px;
+    width: 100%;
+    max-width: 220px;
+    border-radius: 28px;
+    padding: 5px;
+  }
+  .dn-tab-btn {
+    min-width: 96px;
+    padding: 8px 6px;
+  }
+}
+</style>
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css">
+</head>
+
+<body>
+
+<!-- ─────────────────────────────────────────────────────────────
+     HERO STAGE: INVITATION CARD & EXPANDED HERO EXPERIENCE
+     ───────────────────────────────────────────────────────────── -->
+<main class="viewport" id="viewport">
+  <div class="ambient-glow" aria-hidden="true"></div>
+
+  <!-- Header Nav (Appears when Hero blooms) -->
+  <header class="top-nav" aria-label="Controls">
+    <a href="#" class="nav-brand">
+      <img src="DawatNaama_Logo_Transparent.png" alt="Dawat Naama" class="nav-logo">
+      <span class="nav-brand-text">Dawat Naama</span>
+    </a>
+    <div class="nav-controls">
+      <button class="ctrl-btn" id="audioToggle" aria-label="Toggle Background Music">
+        <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+        <span id="audioText">Sound</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Invitation Card Vessel -->
+  <div class="card-vessel" id="cardVessel" role="button" tabindex="0" aria-label="Tap to open the wedding invitation">
+    
+    <!-- Inner Card holding Video, Non-Transparent Frame & Centered Content -->
+    <div class="card-inner">
+      <video class="wedding-video-bg" id="weddingVideo" src="wedding-table-decor.mp4" autoplay muted loop playsinline></video>
+      <div class="video-overlay" aria-hidden="true"></div>
+
+      <!-- Solid Non-Transparent Frame in Brand Royal Burgundy & Gold -->
+      <div class="inner-card-frame" aria-hidden="true"></div>
+
+      <!-- Initial Card Typography (Centered inside inner frame cutout box) -->
+      <div class="card-content-initial">
+        <img class="initial-logo" src="DawatNaama_Logo_Transparent.png" alt="Dawat Naama">
+        <p class="initial-subtitle">Welcome to</p>
+        <h2 class="initial-title">Dawat Naama</h2>
+        <p class="initial-tagline">Make your invitation memorable with us</p>
+      </div>
+
+      <!-- Full Hero Section (Centered 100% in viewport, unfolds with zero zoom) -->
+      <section class="hero-content" id="heroContent" aria-label="Dawat Naama Hero Section">
+        <img class="hero-crest" src="DawatNaama_Logo_Transparent.png" alt="Dawat Naama Monogram">
+        <p class="hero-eyebrow">Luxury Digital Wedding Invitations</p>
+        <h1 class="hero-title">Every Celebration <span>Begins With</span> An Invitation.</h1>
+        <p class="hero-tagline">Make your invitation memorable with us.</p>
+        <div class="hero-actions">
+          <a href="#approachSection" class="btn-primary" id="btnExplore">Explore Collections</a>
+          <a href="#approachSection" class="btn-secondary" id="btnConsult">Our Philosophy</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- Front Left & Right Gatefold Flaps -->
+    <div class="flap left" aria-hidden="true"></div>
+    <div class="flap right" aria-hidden="true"></div>
+
+    <!-- Crease lines etched on stationery -->
+    <div class="fold-lines" aria-hidden="true">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M0 0 L50 50 L100 0 M0 100 L50 50 L100 100" fill="none" stroke="#bda068" stroke-opacity="0.45" stroke-width="0.3"/>
+        <path d="M0 0 L50 50 M0 100 L50 50 M100 0 L50 50 M100 100 L50 50" fill="none" stroke="#ffffff" stroke-opacity="0.8" stroke-width="0.5"/>
+      </svg>
+    </div>
+
+    <!-- Front Logo & Initial Lettering -->
+    <img class="front-brand" src="DawatNaama_Logo_Transparent.png" alt="Dawat Naama Logo">
+
+    <!-- Silver Satin Ribbon with Bow (Width matches card width: 100%) -->
+    <div class="ribbon" aria-hidden="true">
+      <span class="ribbon-strip ribbon-strip-left"></span>
+      <span class="ribbon-strip ribbon-strip-right"></span>
+      <img class="ribbon-bow" src="ribbon-bow.png" alt="">
+    </div>
+
+    <!-- Opening Prompt -->
+    <p class="open-instruction">Tap / Swipe to Open for Magic</p>
+  </div>
+
+  <!-- Replay Opening Bar & Scroll Cue -->
+  <div class="replay-bar">
+    <button class="btn-replay" id="replayBtn" aria-label="Replay Opening Sequence">
+      <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+      <span>Replay Opening</span>
+    </button>
+    <a href="#approachSection" class="scroll-cue">
+      <span>Scroll to discover our approach</span>
+      <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+    </a>
+  </div>
+</main>
+
+<!-- ─────────────────────────────────────────────────────────────
+     SECTION 2: MORE THAN THE DETAILS (OUR APPROACH)
+     - Background: Wedding Table Decoration Visual (Replaced Logo Watermark)
+     - Interactive 3-Pillar Experience
+     ───────────────────────────────────────────────────────────── -->
+<section class="approach-section" id="approachSection" aria-label="Our Approach & Philosophy">
+  
+  <!-- Background Wedding Decoration Visual (No Logo Watermark) -->
+  <div class="approach-bg" aria-hidden="true">
+    <img src="wedding-decoration.jpg" alt="Wedding Table Decoration" class="approach-bg-img" onerror="this.onerror=null; this.src='wedding-table-decor.jpg';">
+    <div class="approach-bg-overlay"></div>
+  </div>
+
+  <div class="approach-container">
+    
+    <!-- Filigree Star Badge -->
+    <div class="filigree-badge" aria-hidden="true">
+      <span class="filigree-line"></span>
+      <span class="filigree-star">✦</span>
+      <span class="filigree-line"></span>
+    </div>
+
+    <!-- Eyebrow -->
+    <p class="approach-eyebrow">More Than The Details</p>
+
+    <!-- Quote Headline -->
+    <h2 class="approach-headline">
+      “An invitation is the <em>first feeling</em> of your celebration.”
+    </h2>
+
+    <!-- Whispering Subline -->
+    <p class="approach-subline">
+      It whispers the tone, the love, and the grandeur of the day before a single word is spoken.
+    </p>
+
+    <!-- Editorial Body Paragraph -->
+    <p class="approach-body">
+      At Dawat Naama, we believe an invitation isn't just about sharing dates and venues—it's an emotional prologue. It is the heirloom that stays in hearts, the quiet elegance that builds anticipation, and the reflection of the love story you are about to celebrate.
+    </p>
+
+    <!-- Interactive Approach Toggle Button -->
+    <button class="btn-approach-toggle" id="toggleApproachBtn" aria-expanded="false" aria-controls="approachPillars">
+      <span>A Note On Our Approach</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+    </button>
+
+    <!-- 3-Pillar Interactive Display -->
+    <div class="approach-pillars" id="approachPillars">
+      
+      <!-- Pillar I -->
+      <article class="pillar-card">
+        <span class="pillar-num">01</span>
+        <h3 class="pillar-title">The Prelude</h3>
+        <span class="pillar-tag">Tone & Anticipation</span>
+        <p class="pillar-desc">
+          Every design choice whispers what guests can anticipate. From bespoke typography to evocative musical scoring, we orchestrate an atmosphere that lingers long before the celebration begins.
+        </p>
+      </article>
+
+      <!-- Pillar II -->
+      <article class="pillar-card">
+        <span class="pillar-num">02</span>
+        <h3 class="pillar-title">The Tactile Soul</h3>
+        <span class="pillar-tag">Elegance & Detail</span>
+        <p class="pillar-desc">
+          Though digital, every suite breathes physical artisanal weight. Digital gold foil, royal monogram crests, and fluid physical opening mechanics create an authentic heirloom tactile sensibility.
+        </p>
+      </article>
+
+      <!-- Pillar III -->
+      <article class="pillar-card">
+        <span class="pillar-num">03</span>
+        <h3 class="pillar-title">The Keepsake</h3>
+        <span class="pillar-tag">Memory & Emotion</span>
+        <p class="pillar-desc">
+          Long after the celebration concludes, your bespoke digital suite endures as a timeless heirloom—an emotional milestone preserved forever in regal perfection.
+        </p>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────────
+     SITE FOOTER
+     ───────────────────────────────────────────────────────────── -->
+<!-- Stage 02: Luxury Interactive Template Collection (Tabbed Showroom) -->
+<section class="dn-collection-section" id="collectionSection" aria-label="Dawat Naama Wedding Invitation Collection">
+  
+  <!-- Intro Header -->
+  <header class="dn-collection-intro">
+    <span class="dn-collection-eyebrow">
+      <i class="eyebrow-line" aria-hidden="true"></i>
+      THE DAWAT NAAMA COLLECTION
+      <i class="eyebrow-line" aria-hidden="true"></i>
+    </span>
+    <div class="dn-intro-frame">
+      <span class="dn-intro-ornament" aria-hidden="true">❧</span>
+      <h2>An Invitation For<br><em>Every Kind</em> Of Celebration</h2>
+    </div>
+    <p>Thoughtfully designed digital invitations, crafted to make your special moments unforgettable.</p>
+  </header>
+
+  <!-- Interactive 5-Template Tab Navigation -->
+  <div class="dn-tabs-nav-container">
+    <div class="dn-tabs-nav" role="tablist" aria-label="Invitation Template Selection">
+      <button class="dn-tab-btn is-active" data-tab="basic" role="tab" aria-selected="true" aria-controls="dnPanel-basic" id="dnTab-basic">
+        <i class="fi fi-rr-gem tab-icon" aria-hidden="true"></i>
+        <span class="dn-tab-num">01</span>
+        <span class="dn-tab-title">Basic</span>
+        <span class="dn-tab-badge">Minimal Elegance</span>
+      </button>
+
+      <button class="dn-tab-btn" data-tab="classic" role="tab" aria-selected="false" aria-controls="dnPanel-classic" id="dnTab-classic">
+        <i class="fi fi-rr-flower tab-icon" aria-hidden="true"></i>
+        <span class="dn-tab-num">02</span>
+        <span class="dn-tab-title">Classic</span>
+        <span class="dn-tab-badge">Timeless Tradition</span>
+      </button>
+
+      <button class="dn-tab-btn" data-tab="character" role="tab" aria-selected="false" aria-controls="dnPanel-character" id="dnTab-character">
+        <i class="fi fi-rr-heart tab-icon" aria-hidden="true"></i>
+        <span class="dn-tab-num">03</span>
+        <span class="dn-tab-title">Character</span>
+        <span class="dn-tab-badge">Playful Story</span>
+      </button>
+
+      <button class="dn-tab-btn" data-tab="premium" role="tab" aria-selected="false" aria-controls="dnPanel-premium" id="dnTab-premium">
+        <i class="fi fi-rr-crown tab-icon" aria-hidden="true"></i>
+        <span class="dn-tab-num">04</span>
+        <span class="dn-tab-title">Premium</span>
+        <span class="dn-tab-badge">Luxury Experience</span>
+      </button>
+
+      <button class="dn-tab-btn" data-tab="custom" role="tab" aria-selected="false" aria-controls="dnPanel-custom" id="dnTab-custom">
+        <i class="fi fi-rr-magic-wand tab-icon" aria-hidden="true"></i>
+        <span class="dn-tab-num">05</span>
+        <span class="dn-tab-title">Custom</span>
+        <span class="dn-tab-badge">Bespoke Atelier</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Tab Panels Container -->
+  <div class="dn-panels-container" id="dnPanelsContainer">
+    <!-- Populated dynamically via JS for all 5 templates -->
+  </div>
+
+</section>
+
+<footer class="site-footer">
+  <img src="DawatNaama_Logo_Transparent.png" alt="Dawat Naama" class="footer-logo">
+  <p class="footer-copy">&copy; 2026 Dawat Naama. All Rights Reserved.</p>
+  <p class="footer-tagline">Where Regal Traditions Meet Digital Elegance</p>
+</footer>
+
+<!-- Background Audio (Optional) -->
+<audio id="bgAudio" loop preload="none">
+  <source src="audio.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+(function() {
+  const viewport = document.getElementById('viewport');
+  const cardVessel = document.getElementById('cardVessel');
+  const weddingVideo = document.getElementById('weddingVideo');
+  const bgAudio = document.getElementById('bgAudio');
+  const audioToggle = document.getElementById('audioToggle');
+  const audioText = document.getElementById('audioText');
+  const replayBtn = document.getElementById('replayBtn');
+  const toggleApproachBtn = document.getElementById('toggleApproachBtn');
+  const approachPillars = document.getElementById('approachPillars');
+
+  let isOpen = false;
+  let isSoundActive = false;
+
+  // Open Sequence:
+  // Step 1: Ribbon knot unties, strips slide outward, flaps open in 3D
+  // Step 2: Smooth transition into Hero section without any zoom-in
+  function openInvitation() {
+    if (isOpen) return;
+    isOpen = true;
+
+    // Ensure video is playing
+    if (weddingVideo) {
+      weddingVideo.play().catch(function() {});
+    }
+
+    // Play audio if unmuted
+    if (bgAudio && isSoundActive) {
+      bgAudio.play().catch(function() {});
+    }
+
+    // Step 1: Untie bow, part ribbons, open flaps
+    viewport.classList.add('is-opening');
+
+    // Step 2: Seamlessly unfold into full Hero (NO zoom-in)
+    setTimeout(function() {
+      viewport.classList.add('hero-active');
+    }, 1050);
+  }
+
+  // Replay: Smoothly close flaps, re-tie ribbon, return to initial card
+  function resetInvitation() {
+    viewport.classList.remove('hero-active');
+    viewport.classList.remove('is-opening');
+    isOpen = false;
+    cardVessel.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    
+    // Reset ribbon animation for subsequent plays
+    const bow = document.querySelector('.ribbon-bow');
+    if (bow) {
+      bow.style.animation = 'none';
+      void bow.offsetWidth; // trigger reflow
+      bow.style.animation = '';
+    }
+  }
+
+  // Interaction handlers
+  cardVessel.addEventListener('click', function(e) {
+    if (!isOpen) {
+      openInvitation();
+    }
+  });
+
+  cardVessel.addEventListener('keydown', function(e) {
+    if ((e.key === 'Enter' || e.key === ' ') && !isOpen) {
+      e.preventDefault();
+      openInvitation();
+    }
+  });
+
+  // Touch swipe support
+  let touchStartY = 0;
+  let touchStartX = 0;
+
+  cardVessel.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].clientX;
+    touchStartY = e.changedTouches[0].clientY;
+  }, { passive: true });
+
+  cardVessel.addEventListener('touchend', function(e) {
+    if (isOpen) return;
+    const diffX = Math.abs(e.changedTouches[0].clientX - touchStartX);
+    const diffY = Math.abs(e.changedTouches[0].clientY - touchStartY);
+    if (diffX > 25 || diffY > 25) {
+      openInvitation();
+    }
+  }, { passive: true });
+
+  // Replay Button
+  replayBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    resetInvitation();
+  });
+
+  // Auto-open if #open or ?open
+  if (window.location.hash === '#open' || window.location.search.includes('open')) {
+    setTimeout(openInvitation, 350);
+  }
+
+  // Sound Toggle Button
+  audioToggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (!bgAudio) return;
+    if (bgAudio.paused) {
+      bgAudio.play().then(function() {
+        isSoundActive = true;
+        audioText.textContent = 'Mute';
+      }).catch(function() {});
+    } else {
+      bgAudio.pause();
+      isSoundActive = false;
+      audioText.textContent = 'Sound';
+    }
+  });
+
+  // 3D Tilt Effect on Desktop Pointer Move (when closed)
+  cardVessel.addEventListener('mousemove', function(e) {
+    if (isOpen) return;
+    const rect = cardVessel.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    const rotX = -(y / rect.height) * 7;
+    const rotY = (x / rect.width) * 7;
+    cardVessel.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  });
+
+  cardVessel.addEventListener('mouseleave', function() {
+    if (isOpen) return;
+    cardVessel.style.transform = 'rotateX(0deg) rotateY(0deg)';
+  });
+
+  // Section 2: Toggle "A Note on Our Approach"
+  toggleApproachBtn.addEventListener('click', function() {
+    const isExpanded = approachPillars.classList.toggle('is-visible');
+    toggleApproachBtn.classList.toggle('is-active', isExpanded);
+    toggleApproachBtn.setAttribute('aria-expanded', isExpanded);
+    const spanText = toggleApproachBtn.querySelector('span:first-child');
+    if (spanText) {
+      spanText.textContent = isExpanded ? 'Close Approach Note' : 'A Note On Our Approach';
+    }
+  });
+
+  // 3D interactive subtle tilt on Pillar cards
+  const pillarCards = document.querySelectorAll('.pillar-card');
+  pillarCards.forEach(function(card) {
+    card.addEventListener('mousemove', function(e) {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      card.style.transform = `translateY(-6px) rotateX(${-(y / rect.height) * 4}deg) rotateY(${(x / rect.width) * 4}deg)`;
+    });
+    card.addEventListener('mouseleave', function() {
+      card.style.transform = 'translateY(0) rotateX(0deg) rotateY(0deg)';
+    });
+  });
+
+})();
+
+  
+  /* ─────────────────────────────────────────────────────────────
+     STAGE 02: LUXURY WEDDING INVITATION COLLECTION (TABBED SHOWROOM)
+     ───────────────────────────────────────────────────────────── */
+  (function initDawatNaamaShowroom() {
+    const CONFIG = {
+      whatsappNumber: '919876543210', // Configurable WhatsApp Business number
+      instagramUrl: 'https://instagram.com/dawatnaama',
+      templates: [
+        {
+          id: 'basic',
+          name: 'Basic',
+          subtitle: 'Minimal Elegance',
+          desc: 'Beautifully simple invitations, designed to make every celebration special.',
+          price: '₹799',
+          previewImg: 'template-basic-preview.jpg',
+          altText: 'Basic Digital Wedding Invitation Preview',
+          included: 'Single-page story · Venue map · Ceremony timeline',
+          customisation: 'Monogram styling · Curated typography · Floral corners',
+          features: [
+            { icon: 'fi-rr-document', text: 'Single-Page Story' },
+            { icon: 'fi-rr-marker', text: 'Interactive Venue Map' },
+            { icon: 'fi-rr-calendar', text: 'Ceremony Timeline' },
+            { icon: 'fi-rr-paper-plane', text: 'WhatsApp RSVP' },
+            { icon: 'fi-rr-smartphone', text: 'Mobile-Optimised' }
+          ]
+        },
+        {
+          id: 'classic',
+          name: 'Classic',
+          subtitle: 'Timeless Tradition',
+          desc: 'A timeless invitation experience inspired by the elegance of traditional celebrations.',
+          price: '₹999',
+          previewImg: 'template-classic-preview.jpg',
+          altText: 'Classic Digital Wedding Invitation Preview',
+          included: 'Mehndi, Nikah & Walima · Royal arch borders · Add-to-Calendar',
+          customisation: 'Arch filigree motifs · Arabic/Urdu calligraphy · Family crest',
+          features: [
+            { icon: 'fi-rr-flower', text: 'Multi-Ceremony Itinerary' },
+            { icon: 'fi-rr-crown', text: 'Royal Arched Borders' },
+            { icon: 'fi-rr-calendar-clock', text: 'Add-to-Calendar' },
+            { icon: 'fi-rr-hourglass-end', text: 'Live Countdown Clock' },
+            { icon: 'fi-rr-text', text: 'Traditional Calligraphy' }
+          ]
+        },
+        {
+          id: 'character',
+          name: 'Character',
+          subtitle: 'Playful Personalisation',
+          desc: 'Bring your story to life with personalised characters and expressive wedding illustrations.',
+          price: '₹1,199',
+          previewImg: 'template-character-preview.jpg',
+          altText: 'Character Digital Wedding Invitation Preview',
+          included: 'Bride & groom illustrated avatars · Whimsical timeline · Song requests',
+          customisation: 'Outfit & hairstyle match · Personalised backdrop scenes',
+          features: [
+            { icon: 'fi-rr-user-heart', text: 'Custom Couple Avatars' },
+            { icon: 'fi-rr-sparkles', text: 'Attire Matched to Real Outfits' },
+            { icon: 'fi-rr-music', text: 'Song Requests RSVP' },
+            { icon: 'fi-rr-heart', text: 'Animated Love Story' },
+            { icon: 'fi-rr-smile', text: 'Whimsical Illustrations' }
+          ]
+        },
+        {
+          id: 'premium',
+          name: 'Premium',
+          subtitle: 'Luxury Experience',
+          desc: 'An extraordinary digital invitation crafted for celebrations that deserve something exceptional.',
+          price: '₹1,499',
+          previewImg: 'template-premium-preview.jpg',
+          altText: 'Premium Digital Wedding Invitation Preview',
+          included: 'Editorial portrait hero · Ambient music player · VIP concierge',
+          customisation: 'Custom audio soundtrack · Gold foil embossed accents · Portal tabs',
+          features: [
+            { icon: 'fi-rr-portrait', text: 'Editorial Portrait Spotlight' },
+            { icon: 'fi-rr-headphones', text: 'Ambient Audio Player' },
+            { icon: 'fi-rr-calendar', text: 'Multi-Day Dress Code' },
+            { icon: 'fi-rr-users-alt', text: 'VIP Plus-One Management' },
+            { icon: 'fi-rr-navigation', text: 'Live Directions Pin' }
+          ]
+        },
+        {
+          id: 'custom',
+          name: 'Custom',
+          subtitle: 'Exclusively Yours',
+          desc: 'Your imagination, your story, your invitation. Created entirely around your celebration.',
+          price: '₹1,999',
+          previewImg: 'template-custom-preview.jpg',
+          altText: 'Custom Digital Wedding Invitation Preview',
+          included: '100% bespoke architecture · Custom family crest · White-glove designer',
+          customisation: 'Unlimited design revisions · Bespoke animations · Custom domain option',
+          features: [
+            { icon: 'fi-rr-magic-wand', text: '100% Bespoke Architecture' },
+            { icon: 'fi-rr-crown', text: 'Custom Royal Monogram Crest' },
+            { icon: 'fi-rr-book-alt', text: 'Personalised Love Story' },
+            { icon: 'fi-rr-bed-alt', text: 'VIP Hotel Accommodations' },
+            { icon: 'fi-rr-palette', text: 'Dedicated Lead Designer' }
+          ]
+        }
+      ]
+    };
+
+    // 1. Persistent Shared Reward Percentage (20% to 30%)
+    let sharedReward = 25;
+    try {
+      const stored = localStorage.getItem('dawat_naama_reward_pct');
+      const parsed = parseInt(stored, 10);
+      if (!isNaN(parsed) && parsed >= 20 && parsed <= 30) {
+        sharedReward = parsed;
+      } else {
+        sharedReward = Math.floor(Math.random() * 11) + 20; // 20 to 30 inclusive
+        localStorage.setItem('dawat_naama_reward_pct', sharedReward.toString());
+      }
+    } catch (e) {
+      sharedReward = 25;
+    }
+
+    // 2. Render Template Panels
+    const panelsContainer = document.getElementById('dnPanelsContainer');
+    if (!panelsContainer) return;
+
+    panelsContainer.innerHTML = CONFIG.templates.map(function(tpl, idx) {
+      const numStr = String(idx + 1).padStart(2, '0');
+      const isActive = idx === 0 ? 'is-active' : '';
+      const waText = encodeURIComponent(
+        `Hello Dawat Naama! I'm interested in the ${tpl.name} Template. My revealed reward is ${sharedReward}%. Please help me proceed with my invitation.`
+      );
+      const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${waText}`;
+
+      return `
+        <article class="dn-template-panel ${isActive}" id="dnPanel-${tpl.id}" role="tabpanel" aria-labelledby="dnTab-${tpl.id}">
+          
+          <!-- Left Column: Template Information -->
+          <div class="dn-panel-info">
+            <span class="dn-template-index">
+              <i class="fi fi-rr-sparkles index-icon" aria-hidden="true"></i>
+              ${numStr} / 05 &bull; THE DAWAT NAAMA COLLECTION
+            </span>
+
+            <h3 class="dn-template-title">${tpl.name}</h3>
+            <span class="dn-template-subtitle">${tpl.subtitle}</span>
+            <p class="dn-template-desc">${tpl.desc}</p>
+
+            <div class="dn-template-meta">
+              <div class="dn-meta-item">
+                <span class="dn-meta-label">
+                  <i class="fi fi-rr-box-alt" aria-hidden="true"></i>
+                  Included Experiences
+                </span>
+                <p class="dn-meta-val">${tpl.included}</p>
+              </div>
+              <div class="dn-meta-item">
+                <span class="dn-meta-label">
+                  <i class="fi fi-rr-magic-wand" aria-hidden="true"></i>
+                  Bespoke Options
+                </span>
+                <p class="dn-meta-val">${tpl.customisation}</p>
+              </div>
+            </div>
+
+            <!-- Key Features using Flaticon UIcons -->
+            <div class="dn-features-list" aria-label="Key features">
+              ${tpl.features.map(f => `
+                <span class="dn-feature-pill">
+                  <i class="fi ${f.icon}" aria-hidden="true"></i>
+                  ${f.text}
+                </span>
+              `).join('')}
+            </div>
+
+            <!-- Scratch Card & Pricing Area -->
+            <div class="dn-pricing-block" id="dnPricingBlock-${tpl.id}">
+              <div class="dn-scratch-heading">
+                <span class="dn-scratch-title-text">
+                  <i class="fi fi-rr-gift" aria-hidden="true"></i>
+                  Exclusive Invitation Privilege
+                </span>
+                <span class="dn-scratch-status-hint" id="dnScratchHint-${tpl.id}">Scratch to unlock reward</span>
+              </div>
+
+              <!-- Genuine HTML5 Canvas Scratch Card -->
+              <div class="dn-scratch-card" id="dnScratchCard-${tpl.id}">
+                <!-- Underneath: ONLY DISCOUNT PERCENTAGE IS REVEALED -->
+                <div class="dn-scratch-revealed">
+                  <span class="dn-revealed-congrats">
+                    <i class="fi fi-rr-sparkles" aria-hidden="true"></i>
+                    Congratulations!
+                    <i class="fi fi-rr-sparkles" aria-hidden="true"></i>
+                  </span>
+                  <p class="dn-revealed-badge">You've Unlocked an Exclusive <strong>${sharedReward}%</strong> Reward</p>
+                  <span class="dn-revealed-note">Special celebration privilege unlocked for your booking</span>
+                </div>
+
+                <div class="dn-scratch-placeholder-hint">
+                  <div>Scratch to Reveal Exclusive Reward</div>
+                  <small>Drag or swipe across foil</small>
+                </div>
+
+                <canvas class="dn-scratch-canvas" id="dnCanvas-${tpl.id}" width="460" height="110"></canvas>
+              </div>
+
+              <!-- Action Button BELOW Scratch Card: SHOWS FINAL PRICE -->
+              <div class="dn-claim-action-wrap">
+                <a href="${waUrl}" target="_blank" rel="noopener" class="dn-claim-btn" id="dnClaimBtn-${tpl.id}">
+                  <i class="fi fi-rr-paper-plane" aria-hidden="true"></i>
+                  <span class="dn-claim-btn-label" id="dnClaimLabel-${tpl.id}">Scratch Above To Unlock Pricing</span>
+                </a>
+                <div class="dn-claim-subtext">
+                  <span>Fixed package price &bull; All inclusive</span>
+                  <a href="${CONFIG.instagramUrl}" target="_blank" rel="noopener">
+                    <i class="fi fi-rr-camera" aria-hidden="true"></i>
+                    Follow @dawatnaama
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Smartphone Mockup (STRICTLY STATIC, ONLY SS SCROLLS ON HOVER) -->
+          <div class="dn-panel-visual">
+            <div class="dn-phone-frame-wrapper" id="dnPhoneWrapper-${tpl.id}">
+              <div class="dn-phone-frame">
+                <div class="dn-phone-island" aria-hidden="true"></div>
+                <div class="dn-phone-glare" aria-hidden="true"></div>
+                
+                <!-- Inner screen viewport: screenshot scrolls on hover, manual scroll allowed -->
+                <div class="dn-phone-screen" id="dnPhoneScreen-${tpl.id}" tabindex="0" role="region" aria-label="${tpl.name} wedding invitation mobile preview, scrollable">
+                  <img src="${tpl.previewImg}" alt="${tpl.altText}" id="dnPhoneImg-${tpl.id}" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <span class="dn-phone-caption">
+              <i class="fi fi-rr-mouse" aria-hidden="true"></i>
+              Hover or touch screen to scroll full invitation
+            </span>
+          </div>
+
+        </article>
+      `;
+    }).join('');
+
+    // 3. Setup Tab Switching
+    const tabButtons = document.querySelectorAll('.dn-tab-btn');
+    tabButtons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const targetId = btn.getAttribute('data-tab');
+        
+        // Update tab buttons
+        tabButtons.forEach(b => {
+          const isSelected = b === btn;
+          b.classList.toggle('is-active', isSelected);
+          b.setAttribute('aria-selected', isSelected);
+        });
+
+        // Switch panels
+        const allPanels = document.querySelectorAll('.dn-template-panel');
+        allPanels.forEach(p => {
+          const isTarget = p.id === `dnPanel-${targetId}`;
+          p.classList.toggle('is-active', isTarget);
+        });
+
+        // Smoothly scroll active tab button into center of view on mobile
+        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+        // Ensure canvas for target panel is sized accurately after layout reflow
+        requestAnimationFrame(function() {
+          const canvas = document.getElementById(`dnCanvas-${targetId}`);
+          if (canvas && canvas.__resizeFn) {
+            canvas.__resizeFn();
+          }
+        });
+      });
+    });
+
+    // 4. Initialize Scratch Cards & Phone Hover Scrolling for each template
+    CONFIG.templates.forEach(function(tpl) {
+      initScratchCard(tpl.id);
+      initPhoneScroll(tpl.id);
+    });
+
+    // --- Scratch Card Implementation ---
+    function initScratchCard(tplId) {
+      const card = document.getElementById(`dnScratchCard-${tplId}`);
+      const canvas = document.getElementById(`dnCanvas-${tplId}`);
+      const block = document.getElementById(`dnPricingBlock-${tplId}`);
+      const hint = document.getElementById(`dnScratchHint-${tplId}`);
+      if (!card || !canvas || !block) return;
+
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      let isDrawing = false;
+      let isRevealed = false;
+      let lastX = 0;
+      let lastY = 0;
+
+      function drawFoilSurface() {
+        if (isRevealed) return;
+        const rect = card.getBoundingClientRect();
+        if (rect.width <= 0 || rect.height <= 0) return;
+        canvas.width = Math.round(rect.width);
+        canvas.height = Math.round(rect.height);
+
+        const w = canvas.width;
+        const h = canvas.height;
+        ctx.save();
+        ctx.globalCompositeOperation = 'source-over';
+
+        // Champagne Gold Foil Gradient
+        const grad = ctx.createLinearGradient(0, 0, w, h);
+        grad.addColorStop(0, '#c7ad76');
+        grad.addColorStop(0.2, '#f6ebcd');
+        grad.addColorStop(0.45, '#bda068');
+        grad.addColorStop(0.7, '#dfc896');
+        grad.addColorStop(0.9, '#8c7343');
+        grad.addColorStop(1, '#c5a76c');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, w, h);
+
+        // Ornate Borders
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.55)';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(6, 6, w - 12, h - 12);
+        ctx.strokeStyle = 'rgba(90, 24, 39, 0.2)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(9, 9, w - 18, h - 18);
+
+        // Gold Foil Shimmer Stars
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+        for (let i = 0; i < 28; i++) {
+          const rx = (i * 41) % w;
+          const ry = (i * 27) % h;
+          ctx.beginPath();
+          ctx.arc(rx, ry, 1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Foil Text Seal
+        ctx.fillStyle = '#4a371c';
+        ctx.font = 'italic 500 15px "Cormorant Garamond", serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('❧  Scratch to Reveal Exclusive Reward  ❧', w / 2, h / 2 - 8);
+
+        ctx.font = '600 8.5px "Montserrat", sans-serif';
+        ctx.fillStyle = '#6d552f';
+        ctx.fillText('DAWAT NAAMA &bull; ROYAL REWARD PRIVILEGE', w / 2, h / 2 + 13);
+
+        ctx.restore();
+      }
+
+      canvas.__resizeFn = drawFoilSurface;
+      drawFoilSurface();
+      window.addEventListener('resize', debounce(drawFoilSurface, 150));
+
+      function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const touch = (e.touches && e.touches.length > 0) ? e.touches[0] : 
+                      (e.changedTouches && e.changedTouches.length > 0) ? e.changedTouches[0] : e;
+        return {
+          x: touch.clientX - rect.left,
+          y: touch.clientY - rect.top
+        };
+      }
+
+      function scratchAt(x, y) {
+        if (isRevealed) return;
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(x, y, 22, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (lastX && lastY) {
+          ctx.lineWidth = 44;
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.beginPath();
+          ctx.moveTo(lastX, lastY);
+          ctx.lineTo(x, y);
+          ctx.stroke();
+        }
+        ctx.restore();
+
+        lastX = x;
+        lastY = y;
+        checkProgress();
+      }
+
+      function checkProgress() {
+        if (isRevealed) return;
+        const w = canvas.width;
+        const h = canvas.height;
+        try {
+          const imgData = ctx.getImageData(0, 0, w, h);
+          const data = imgData.data;
+          let transparent = 0;
+          const total = data.length / 4;
+          for (let i = 3; i < data.length; i += 48) {
+            if (data[i] === 0) transparent++;
+          }
+          const pct = (transparent / (total / 12)) * 100;
+          if (pct >= 40) {
+            triggerReveal();
+          }
+        } catch (e) {}
+      }
+
+      function triggerReveal() {
+        if (isRevealed) return;
+        isRevealed = true;
+        canvas.style.transition = 'opacity 0.5s ease';
+        canvas.style.opacity = '0';
+        setTimeout(() => {
+          canvas.style.display = 'none';
+          block.classList.add('is-scratched');
+          if (hint) hint.textContent = 'Reward unlocked!';
+          const btnLabel = document.getElementById(`dnClaimLabel-${tplId}`);
+          const currentTpl = CONFIG.templates.find(t => t.id === tplId);
+          if (btnLabel && currentTpl) {
+            btnLabel.innerHTML = `Claim Your Invitation &bull; ${currentTpl.price}`;
+          }
+        }, 500);
+      }
+
+      // Scratch Mouse & Touch Events
+      canvas.addEventListener('mousedown', function(e) {
+        isDrawing = true;
+        const p = getPos(e);
+        lastX = p.x;
+        lastY = p.y;
+        scratchAt(p.x, p.y);
+      });
+
+      canvas.addEventListener('mousemove', function(e) {
+        if (!isDrawing) return;
+        const p = getPos(e);
+        scratchAt(p.x, p.y);
+      });
+
+      window.addEventListener('mouseup', function() {
+        isDrawing = false;
+        lastX = 0;
+        lastY = 0;
+      });
+
+      canvas.addEventListener('touchstart', function(e) {
+        if (e.cancelable) e.preventDefault();
+        isDrawing = true;
+        const p = getPos(e);
+        lastX = p.x;
+        lastY = p.y;
+        scratchAt(p.x, p.y);
+      }, { passive: false });
+
+      canvas.addEventListener('touchmove', function(e) {
+        if (e.cancelable) e.preventDefault();
+        if (!isDrawing) return;
+        const p = getPos(e);
+        scratchAt(p.x, p.y);
+      }, { passive: false });
+
+      canvas.addEventListener('touchend', function() {
+        isDrawing = false;
+        lastX = 0;
+        lastY = 0;
+      });
+    }
+
+    // --- Phone Screenshot Scroll (NO PHONE MOVEMENT, ONLY SCREENSHOT SCROLLS) ---
+    function initPhoneScroll(tplId) {
+      const wrapper = document.getElementById(`dnPhoneWrapper-${tplId}`);
+      const screen = document.getElementById(`dnPhoneScreen-${tplId}`);
+      if (!wrapper || !screen) return;
+
+      let scrollInterval = null;
+      let isHovered = false;
+
+      // When hovering over the phone mockup: ONLY the screenshot inside scrolls
+      wrapper.addEventListener('mouseenter', function() {
+        isHovered = true;
+        startScroll();
+      });
+
+      wrapper.addEventListener('mouseleave', function() {
+        isHovered = false;
+        stopAndResetScroll();
+      });
+
+      function startScroll() {
+        clearInterval(scrollInterval);
+        const maxScroll = screen.scrollHeight - screen.clientHeight;
+        if (maxScroll <= 0) return;
+
+        scrollInterval = setInterval(function() {
+          if (!isHovered) {
+            clearInterval(scrollInterval);
+            return;
+          }
+          if (screen.scrollTop < maxScroll) {
+            screen.scrollTop += 2.2;
+          } else {
+            clearInterval(scrollInterval);
+          }
+        }, 16);
+      }
+
+      function stopAndResetScroll() {
+        clearInterval(scrollInterval);
+        const scrollStep = screen.scrollTop / 20;
+        let count = 0;
+        const resetInterval = setInterval(function() {
+          if (screen.scrollTop > 0 && count < 20) {
+            screen.scrollTop -= scrollStep;
+            count++;
+          } else {
+            screen.scrollTop = 0;
+            clearInterval(resetInterval);
+          }
+        }, 16);
+      }
+    }
+
+    function debounce(fn, wait) {
+      let t;
+      return function() {
+        clearTimeout(t);
+        t = setTimeout(fn, wait);
+      };
+    }
+  })();
+
+</script>
+</body>
+</html>
